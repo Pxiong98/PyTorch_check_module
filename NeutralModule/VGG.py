@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 
 class VGG(nn.Module):
-    def __init__(self, num_classes=1000):
+    def __init__(self, num_classes=1000)://1000个分类
         super(VGG, self).__init__()
         layers = []
         in_dim = 3
@@ -12,7 +12,7 @@ class VGG(nn.Module):
             in_dim = out_dim
             if i == 1 or i==3 or i==6 or i==9 or i==12:
                 layers += [nn.MaxPool2d(2, 2)]
-                if i != 9 :#除了第10个卷积核和前免维度一样，其他的加倍
+                if i != 9 :#除了第10个卷积核和前面维度一样，其他的加倍
                     out_dim*=2
         self.features = nn.Sequential(*layers)
         self.classifier = nn.Sequential(
